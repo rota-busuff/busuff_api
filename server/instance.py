@@ -21,12 +21,16 @@ class Server():
         
         self.usuario_ns = self.usuario_ns()
         self.historico_ns = self.historico_ns()
+        self.rota_ns = self.rota_ns()
     
     def usuario_ns(self,):
             return self.api.namespace(name="Usuarios", description="usuarios cadastrados", path="/usuarios")
         
     def historico_ns(self,):
         return self.api.namespace(name="Historico", description="historicos registrados", path="/historico")
+    
+    def rota_ns(self,):
+        return self.api.namespace(name="Rota", description="rotas cadastradas", path="/rotas")
         
     def run(self,):
         self.app.run(

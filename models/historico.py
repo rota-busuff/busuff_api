@@ -18,7 +18,7 @@ class HistoricoModel(db.Model):
         self.rota = rota
         
     def __repr__(self):
-        return f"UsuarioModel(data={self.data}, latitude={self.latitude}, longitude={self.longitude}, rota={self.rota})"
+        return f"HistoricoModel(data={self.data}, latitude={self.latitude}, longitude={self.longitude}, rota={self.rota})"
     
     def json(self):
         return {
