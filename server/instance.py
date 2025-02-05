@@ -20,9 +20,13 @@ class Server():
         db.init_app(self.app)
         
         self.usuario_ns = self.usuario_ns()
+        self.historico_ns = self.historico_ns()
     
     def usuario_ns(self,):
             return self.api.namespace(name="Usuarios", description="usuarios cadastrados", path="/usuarios")
+        
+    def historico_ns(self,):
+        return self.api.namespace(name="Historico", description="historicos registrados", path="/historico")
         
     def run(self,):
         self.app.run(
