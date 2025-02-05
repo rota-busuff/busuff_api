@@ -1,5 +1,18 @@
 from flask import Flask
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+from ma import ma
+from db import db
 from server.instance import server
-from controller.usuario import *
+from routes.usuario import usuario_ns
 
-server.run()
+api = server.api
+app = server.app
+
+ma.init_app(app)
+migrate = Migrate(app, db)
+
+api.add_namespace(usuario_ns, path='/usuarios')
+
+if __name__ == '__main__':
+    app.run(debug=True)
