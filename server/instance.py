@@ -22,6 +22,9 @@ class Server():
         self.usuario_ns = self.usuario_ns()
         self.historico_ns = self.historico_ns()
         self.rota_ns = self.rota_ns()
+        self.parada_ns = self.parada_ns()
+        self.rota_parada_ns = self.rota_parada_ns()
+        self.viagem_ns = self.viagem_ns()
     
     def usuario_ns(self,):
             return self.api.namespace(name="Usuarios", description="usuarios cadastrados", path="/usuarios")
@@ -31,6 +34,15 @@ class Server():
     
     def rota_ns(self,):
         return self.api.namespace(name="Rota", description="rotas cadastradas", path="/rotas")
+    
+    def parada_ns(self,):
+        return self.api.namespace(name="Parada", description="paradas cadastradas", path="/paradas")
+    
+    def rota_parada_ns(self,):
+        return self.api.namespace(name="Rota_Parada", description="paradas cadastradas por rota", path="/rotaparadas")
+    
+    def viagem_ns(self):
+        return self.api.namespace(name="Viagem", description="viagens registradas", path="/viagens")
         
     def run(self,):
         self.app.run(
