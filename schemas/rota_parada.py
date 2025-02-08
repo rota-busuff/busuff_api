@@ -6,3 +6,4 @@ class RotaParadaSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = RotaParadaModel
         load_instance = True
+        include_fk = True

@@ -1,33 +1,25 @@
 from db import db
-from datetime import datetime
-import pytz
 
-class HistoricoModel(db.Model):
-    __tablename__ = "historico"
+class HorarioModel(db.Model):
+    __tablename__ = "horario"
     
     id = db.Column(db.Integer, primary_key=True)
     id_rota = db.Column(db.Integer, db.ForeignKey("rota.id"), nullable=False)
-    data_registro = db.Column(db.DateTime, nullable=False, default=datetime.now())
-    posicao = db.Column(db.Integer, db.ForeignKey("parada.id"), nullable=False)
-    mensagem = db.Column(db.String(15))
+    horario = db.Column(db.String(5), nullable=False)
     
-    def __init__(self, id_rota, data_registro, posicao, mensagem):
+    def __init__(self, id_rota, horario):
         self.id_rota = id_rota
-        self.data_registro = data_registro
-        self.posicao = posicao
-        self.mensagem = mensagem
+        self.horario = horario
         
     def __repr__(self):
-        return f"HistoricoModel(id_rota={self.id_rota}data_registro={self.data_registro}, posicao={self.posicao}, mensagem={self.mensagem})"
+        return f"HorarioModel(id_rota={self.id_rota}, horario={self.horario})"
     
     def json(self):
         return {
             'id_rota': self.id_rota,
-            'data_registro': self.data_registro,
-            'posicao': self.posicao,
-            'mensagem': self.mensagem
+            'horario': self.horario
         }
-            
+        
     @classmethod
     def find_by_id(cls, id):
         return cls.query.filter_by(id=id).first()

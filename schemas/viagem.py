@@ -6,3 +6,4 @@ class ViagemSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = ViagemModel
         load_instance = True
+        include_fk = True

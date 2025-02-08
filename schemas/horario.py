@@ -1,9 +1,9 @@
 from ma import ma
-from models.parada import ParadaModel
+from models.horario import HorarioModel
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
-class ParadaSchema(SQLAlchemyAutoSchema):
+class HorarioSchema(SQLAlchemyAutoSchema):
     class Meta:
-        model = ParadaModel
+        model = HorarioModel
         load_instance = True
         include_fk = True

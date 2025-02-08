@@ -10,10 +10,10 @@ historico_schema = HistoricoSchema()
 historico_list_schema = HistoricoSchema(many=True)
 
 item = historico_ns.model('Historico', {
-    'data': fields.DateTime(description="Data e hora do registro"),
-    'latitude': fields.Float(description="Latitude da localização"),
-    'longitude': fields.Float(description="Longitude da localização"),
-    'rota': fields.String(description="Rota identificadora"),
+    'id_rota': fields.Integer(description="id da rota"),
+    'data_registro': fields.DateTime(description="Data e hora do registro"),
+    'posicao': fields.Integer(description="chave estrangeira da parada"),
+    'mensagem': fields.String(description="previsao de chegada no proximo ponto")
 })
 
 
@@ -35,10 +35,10 @@ class Historico(Resource):
 
         historico_json = request.get_json()
         
-        historico_data.data = historico_json.get("data", historico_data.data)
-        historico_data.latitude = historico_json.get("latitude", historico_data.latitude)
-        historico_data.longitude = historico_json.get("longitude", historico_data.longitude)
-        historico_data.rota = historico_json.get("rota", historico_data.rota)
+        historico_data.id_rota = historico_json.get("id_rota", historico_data.id_rota)
+        historico_data.data_registro = historico_json.get("data_registro", historico_data.data_registro)
+        historico_data.posicao = historico_json.get("posicao", historico_data.posicao)
+        historico_data.mensagem = historico_json.get("mensagem", historico_data.mensagem)
 
         historico_data.add_to_db()
         
@@ -63,10 +63,10 @@ class HistoricoList(Resource):
         historico_json = request.get_json()
         
         historico_model = HistoricoModel(
-            data=historico_json['data'],
-            latitude=historico_json['latitude'],
-            longitude=historico_json['longitude'],
-            rota=historico_json['rota']
+            id_rota=historico_json['id_rota'],
+            data_registro=historico_json['data_registro'],
+            posicao=historico_json['posicao'],
+            mensagem=historico_json['mensagem'],
         )
         
         historico_model.add_to_db()

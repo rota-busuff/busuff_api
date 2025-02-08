@@ -25,6 +25,7 @@ class Server():
         self.parada_ns = self.parada_ns()
         self.rota_parada_ns = self.rota_parada_ns()
         self.viagem_ns = self.viagem_ns()
+        self.horario_ns = self.horario_ns()
     
     def usuario_ns(self,):
             return self.api.namespace(name="Usuarios", description="usuarios cadastrados", path="/usuarios")
@@ -44,6 +45,9 @@ class Server():
     def viagem_ns(self):
         return self.api.namespace(name="Viagem", description="viagens registradas", path="/viagens")
         
+    def horario_ns(self):
+        return self.api.namespace(name="Horario", description="horario das rotas", path="/horarios")
+    
     def run(self,):
         self.app.run(
             debug=True
