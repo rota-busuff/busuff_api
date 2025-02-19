@@ -9,7 +9,7 @@ usuario_schema = UsuarioSchema()
 usuario_list_schema = UsuarioSchema(many=True)
 
 item = usuario_ns.model('Usuario', {
-    'login': fields.String(description="Nome de usuário"),
+    'login': fields.Integer(description="ID de usuário (rota)"),
     'senha': fields.String(description="Senha do usuário"),
     'perfil': fields.String(description="Perfil do usuário"),
     'online': fields.Integer(default=0)
