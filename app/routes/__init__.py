@@ -11,9 +11,9 @@ def register_routes(api):
         usuario_ns,
         rota_ns,
         parada_ns,
+        rota_parada_ns,
         horario_ns,
         historico_ns,
-        rota_parada_ns,
         viagem_ns
     ]
 
