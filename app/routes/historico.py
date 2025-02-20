@@ -120,3 +120,49 @@ class HistoricoMovimento(Resource):
             ], 200
         
         return {'message': 'Nenhum histórico encontrado'}, 404
+
+@historico_ns.route('/movimento/top')
+class HistoricoTopMovimento(Resource):
+    @historico_ns.doc('listar os últimos históricos por rota')
+    def get(self):
+        """Obtém os últimos registros distintos por rota"""
+        
+        # SELECT DISTINCT ON (id_rota) * 
+        # FROM "historico" 
+        # ORDER BY id_rota, data_registro DESC;
+
+
+        subquery = db.session.query(
+            HistoricoModel.id,
+            HistoricoModel.id_rota,
+            HistoricoModel.posicao,
+            HistoricoModel.mensagem,
+            HistoricoModel.data_registro,
+            UsuarioModel.online
+        ).join(UsuarioModel, HistoricoModel.id_rota == UsuarioModel.login
+        ).order_by(HistoricoModel.id_rota, HistoricoModel.data_registro.desc()
+        ).distinct(HistoricoModel.id_rota).subquery()
+
+        historico_data = db.session.query(
+            subquery.c.id,
+            subquery.c.id_rota,
+            RotaModel.nome.label("rota_nome"),
+            ParadaModel.nome.label("parada_nome"),
+            subquery.c.mensagem,
+            subquery.c.online
+        ).join(RotaModel, subquery.c.id_rota == RotaModel.id
+        ).join(ParadaModel, subquery.c.posicao == ParadaModel.id
+        ).all()
+
+        if historico_data:
+            return [
+                {
+                    "id": item.id,
+                    "rota": item.rota_nome,
+                    "posicao": item.parada_nome,
+                    "mensagem": item.mensagem,
+                    "online": item.online
+                } for item in historico_data
+            ], 200
+
+        return {'message': 'Nenhum histórico encontrado'}, 404
