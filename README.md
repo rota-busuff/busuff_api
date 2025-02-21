@@ -1,22 +1,23 @@
 # API para Rota BusUFF
 
-## 📋 Requisitos  
-- Python Flask  
-    ```bash
-    pip install flask
-    ```
-- Flask Restx  
-    ```bash
-    pip install flask-restx
-    ```
-- SQLAlchemy  
-    ```bash
-    pip install flask-sqlalchemy
-    ```
-- Marshmallow  
-    ```bash
-    pip install marshmallow-sqlalchemy
-    ```
+## 📋 Requisitos
+```python
+# requirements.txt
+alembic==1.14.1
+Flask==3.1.0
+flask_marshmallow==1.3.0
+Flask_Migrate==4.1.0
+flask_restx==1.3.0
+flask_sqlalchemy==3.1.1
+marshmallow_sqlalchemy==1.4.1
+pytz==2025.1
+SQLAlchemy==2.0.37
+```
+
+Para instalar todos os requisitos necessários, vá até o diretório da raiz do projeto e execute o comando:
+```bash
+pip install -r requirements.txt
+```
 
 ## ▶️ Executando a aplicação  
 
