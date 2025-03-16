@@ -56,36 +56,36 @@ class Historico(Resource):
         
         return {'message': 'Histórico não encontrado'}, 404
 
-    @historico_ns.expect(item)
-    @historico_ns.doc('atualizar_historico')
-    def put(self, id):
-        """Atualiza um histórico pelo ID"""
-        historico_data = HistoricoModel.query.get(id)
+    # @historico_ns.expect(item)
+    # @historico_ns.doc('atualizar_historico')
+    # def put(self, id):
+    #     """Atualiza um histórico pelo ID"""
+    #     historico_data = HistoricoModel.query.get(id)
         
-        if not historico_data:
-            return {'message': 'Histórico não encontrado'}, 404
+    #     if not historico_data:
+    #         return {'message': 'Histórico não encontrado'}, 404
 
-        historico_json = historico_ns.payload
+    #     historico_json = historico_ns.payload
         
-        historico_data.id_rota = historico_json.get("id_rota", historico_data.id_rota)
-        historico_data.data_registro = historico_json.get("data_registro", historico_data.data_registro)
-        historico_data.posicao = historico_json.get("posicao", historico_data.posicao)
-        historico_data.mensagem = historico_json.get("mensagem", historico_data.mensagem)
+    #     historico_data.id_rota = historico_json.get("id_rota", historico_data.id_rota)
+    #     historico_data.data_registro = historico_json.get("data_registro", historico_data.data_registro)
+    #     historico_data.posicao = historico_json.get("posicao", historico_data.posicao)
+    #     historico_data.mensagem = historico_json.get("mensagem", historico_data.mensagem)
 
-        db.session.commit()
+    #     db.session.commit()
         
-        return historico_schema.dump(historico_data), 200
+    #     return historico_schema.dump(historico_data), 200
 
-    @historico_ns.doc('deletar_historico')
-    def delete(self, id):
-        """Deleta um histórico pelo ID"""
-        historico_data = HistoricoModel.query.get(id)
-        if not historico_data:
-            return {'message': 'Histórico não encontrado'}, 404
+    # @historico_ns.doc('deletar_historico')
+    # def delete(self, id):
+    #     """Deleta um histórico pelo ID"""
+    #     historico_data = HistoricoModel.query.get(id)
+    #     if not historico_data:
+    #         return {'message': 'Histórico não encontrado'}, 404
         
-        db.session.delete(historico_data)
-        db.session.commit()
-        return '', 204
+    #     db.session.delete(historico_data)
+    #     db.session.commit()
+    #     return '', 204
 
 @historico_ns.route('/movimento')
 class HistoricoMovimento(Resource):
